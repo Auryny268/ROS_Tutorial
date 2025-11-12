@@ -1082,8 +1082,9 @@ This section goes through configuring the OS by flashing the microSD card with U
   1. Follow the instructions from the following link to flash Ubuntu 22.04 onto the microSD card: [https://ubuntu.com/download/raspberry-pi](url). Follow the `Desktop` tutorial. You need your laptop to do this.
   2. Insert the flashed microSD card into the Raspberry Pi and connect the Pi to a monitor, keyboard, and mouse. Power the Pi, and the monitor will turn on automatically. 
   3. Set the username to `tugxx`, with `xx` be you team number. If you are team 5, it will be `tug05`. Please set the password to `boats0519`.
-  4. To give the tug a static IP address, we need to be talking to a travel router that talks to GTother (for example). We have router GLiNet AX3000 in lab. So basically, `GTother` (if you needs internet) -> `Router` -> both your laptop and tug is connected to `Router` -> can `ssh`
-  5. The router is set up for you already. Connect to wifi on your laptop: `GL-MT3000-0a9`  OR  `GL-MT3000-0a9-5G`
+  4. To give the tug a static IP address, we need to be talking to a travel router that talks to GTother (for example). We have router GLiNet AX3000 in lab. So basically, `GTother` (if you needs internet) -> `Router` -> both your laptop and tug is connected to `Rourouter ter` -> can `ssh`
+  - This means connect your Pi via ethernet to the GLiNet router.
+  6. The router is set up for you already. Connect to wifi on your laptop: `GL-MT3000-0a9`  OR  `GL-MT3000-0a9-5G`
   - Password: `boats0519`
   6. Admin password for logging in from the web (DNS should be the correct IP): `@boats0519`
   7. If steps 4-6 are too much for you right now - just connect to gtother following this website: [https://auth.lawn.gatech.edu/key/](url)
@@ -1110,6 +1111,35 @@ This section goes through configuring the OS by flashing the microSD card with U
 <summary><strong>8.2 Custom Setup in Pi</strong></summary>
 
 <hr>
+
+#### 8.1 c Installing Wifi Adapter
+1. Installing the adapter
+- Requirements: Pi is powered off; You have USB->SMA adapter; SMA-SMA cable and SMA wifi antenna
+- Plug in all components with the Pi powered off
+2. Power your Pi on
+3. Connect your Pi to the GLinet router via ethernet and your laptop connected via wifi to 'GL-MT3000-0a9' or 'GL-MT3000-0a9-5G'
+4. ssh into your Pi
+5. Enter the following into the terminal:
+  ```
+    cd ~
+    git clone https://github.com/morrownr/8821cu-20210916.git
+    cd 8821cu-20210916
+    sudo ./install-driver.sh
+    sudo reboot
+    iw dev
+  ```
+- You should see both phy#1 and phy#0
+  ```
+   sudo nmcli dev wifi connect "GL-MT3000-0a9" password "boats0519" ifname wlxe84e06fa5343
+  
+  ```
+6. To autoconnect to adpater on boot
+    ```
+
+     sudo nmcli connection add type wifi ifname wlxe84e06fa5343 con-name glinet-ap ssid "GL-MT3000-0a9"
+     sudo nmcli connection modify glinet-ap wifi-sec.key-mgmt wpa-psk wifi-sec.psk "YOUR_WIFI_PASSWORD"
+     sudo nmcli connection up glinet-ap
+    ```
 
 #### 8.2.a git CLI
   You are on your laptop that is ssh-ed into the Stinger Raspberry Pi.
