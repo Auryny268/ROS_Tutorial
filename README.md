@@ -1103,14 +1103,6 @@ This section goes through configuring the OS by flashing the microSD card with U
   2. After logging into the Pi, follow the link to install ROS2 Humble: [https://roboticsbackend.com/install-ros2-on-raspberry-pi/](url)
   3. You should have installed `colcon` if you followed till the end of the tutorial. One more thing: `sudo apt install build-essential`
 
-<hr>
-
-</details>
-
-<details>
-<summary><strong>8.2 Custom Setup in Pi</strong></summary>
-
-<hr>
 
 #### 8.1 c Installing Wifi Adapter
 1. Installing the adapter
@@ -1139,7 +1131,17 @@ This section goes through configuring the OS by flashing the microSD card with U
      sudo nmcli connection add type wifi ifname wlxe84e06fa5343 con-name glinet-ap ssid "GL-MT3000-0a9"
      sudo nmcli connection modify glinet-ap wifi-sec.key-mgmt wpa-psk wifi-sec.psk "YOUR_WIFI_PASSWORD"
      sudo nmcli connection up glinet-ap
-    ```
+
+    
+<hr>
+
+</details>
+
+<details>
+<summary><strong>8.2 Custom Setup in Pi</strong></summary>
+
+<hr>
+```
 
 #### 8.2.a git CLI
   You are on your laptop that is ssh-ed into the Stinger Raspberry Pi.
