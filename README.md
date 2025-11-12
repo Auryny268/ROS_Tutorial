@@ -1129,7 +1129,7 @@ This section goes through configuring the OS by flashing the microSD card with U
     ```
 
      sudo nmcli connection add type wifi ifname wlxe84e06fa5343 con-name glinet-ap ssid "GL-MT3000-0a9"
-     sudo nmcli connection modify glinet-ap wifi-sec.key-mgmt wpa-psk wifi-sec.psk "YOUR_WIFI_PASSWORD"
+     sudo nmcli connection modify glinet-ap wifi-sec.key-mgmt wpa-psk wifi-sec.psk "boats0519"
      sudo nmcli connection up glinet-ap
 
     
